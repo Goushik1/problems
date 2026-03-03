@@ -9,12 +9,12 @@ struct Node{
         left = right = NULL;
     }
 };
-int diameter = 0;
-int dfs(Node* root){
+int ans = 0;
+int diameter(Node* root){
     if(!root) return 0;
-    int left = dfs(root->left);
-    int right = dfs(root->right);
-    diameter = max(diameter,left+right);
+    int left = diameter(root->left);
+    int right = diameter(root->right);
+    ans = max(ans,left+right); //in terms of edges
     return 1 + max(left,right);
 }
 int main(){
@@ -23,6 +23,6 @@ int main(){
     root->right=new Node(3);
     root->left->left=new Node(4);
     root->left->right=new Node(5);
-    dfs(root);
-    cout<<diameter;
+    diameter(root);
+    cout<<ans;
 }
