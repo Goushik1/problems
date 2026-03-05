@@ -9,18 +9,27 @@ struct Node{
         left = right = NULL;
     }
 };
-bool checkBST(Node *root,int min,int max){
-    if(!root) return true;
-    if(root->data <= min || root->data >= max){
-        return false;
+
+int count = 0;
+int ans = -1;
+void inorder(Node* root,int k){
+    if(!root || ans != -1) return;
+    inorder(root->left,k);
+    count++;
+    if(count == k){
+        ans = root->data;
+        return;
     }
-    return (checkBST(root->left,min,root->data) && checkBST(root->right,root->data,max));
+    inorder(root->right,k);
 }
+
 int main(){
     Node* root=new Node(1);
     root->left=new Node(0);
     root->right=new Node(3);
     root->right->left=new Node(2);
     root->right->right=new Node(5);
-    cout<<checkBST(root,INT_MIN,INT_MAX);
+
+    inorder(root,3);
+    cout<<ans;
 }
