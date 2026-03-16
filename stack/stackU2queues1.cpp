@@ -30,5 +30,5 @@ int main(){
     s.push(1);
     s.pop();
     cout<<s.top();
-    
+
 }
